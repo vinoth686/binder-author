@@ -1,4 +1,4 @@
-<app-header></app-header>
+<!-- <app-header></app-header> -->
 <div class="page-banner">
     <h3>Discover Latest Courses on Angular</h3>
 </div>
@@ -18,9 +18,16 @@
         <p>Actual Price - {{ course.actualPrice }}</p>
         <p>Discounted Price - {{ course.discountPercentage }}</p>
         <p>Tags - {{ course.tags }}</p>
-        <div class="buttonContainer">
-          <button class="cart">Add to Carts</button>
-          <button class="wishlist">Wishlist</button>
+        <div class="buttonContainer" >
+          <button class="cart" (click)="addToCart(course)">Add to Cart
+            <span class="fa fa-plus"></span>
+          </button>
+          <button class="wishlist">Wishlist
+            <span class="fa fa-heart"></span>
+          </button>
+          <button class="arrow" (click)="goToDetails(course)">
+            <span class="fa fa-heart"></span>
+          </button>
         </div>
     </div>
   </div> 
@@ -28,3 +35,5 @@
   <div class="pagination-container">
     <pagination-controls (pageChange)="p = $event" class="float-right"></pagination-controls>
   </div>
+<!-- 
+  <app-wishlist [cartItems]="cartItems"></app-wishlist> -->

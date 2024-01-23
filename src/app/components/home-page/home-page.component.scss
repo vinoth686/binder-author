@@ -24,6 +24,14 @@
   
   .buttonContainer {
     margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+   
+  }
+
+  .buttonContainer button {
+    margin: 0;
+    background-color: white;
   }
   
   @media (max-width: 768px) {
@@ -40,11 +48,14 @@
 
   .cart {
     margin-right: 40px;
-    width: 90px;
   }
 
   .wishlist {
     width: 90px;
+  }
+
+  .arrow {
+    border: none;
   }
 
   .pagination-container {

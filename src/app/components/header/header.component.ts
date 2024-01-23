@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent {
   constructor(private router: Router) {}
-  public navigatetoHomePage() : void  {
-    this.router.navigate(['/home'])
+  public navigatetoWishList() : void  {
+    this.router.navigate(['/wishlist'])
   }
 }
