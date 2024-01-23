@@ -1,0 +1,30 @@
+<app-header></app-header>
+<div class="page-banner">
+    <h3>Discover Latest Courses on Angular</h3>
+</div>
+<!-- <div *ngFor="let course of courses">
+    <ul>
+      <li>Author - {{ course.author }}</li>
+      <li>Actual Price - ₹{{ course.actualPrice }}</li>
+      <li>Discounted %age - {{ course.discountPercentage }}%</li>
+      <li>Tags - {{ course.tags.join(', ') }}</li>
+    </ul>
+  </div> -->
+
+  <div class="card-container">
+    <div *ngFor="let course of courses | paginate: { itemsPerPage: 4, currentPage: p }" class="card">
+    <h3>Viewing {{ course.courseName }}</h3>
+        <p>Author - {{ course.author }}</p>
+        <p>Actual Price - {{ course.actualPrice }}</p>
+        <p>Discounted Price - {{ course.discountPercentage }}</p>
+        <p>Tags - {{ course.tags }}</p>
+        <div class="buttonContainer">
+          <button class="cart">Add to Cart</button>
+          <button class="wishlist">Wishlist</button>
+        </div>
+    </div>
+  </div> 
+
+  <div class="pagination-container">
+    <pagination-controls (pageChange)="p = $event" class="float-right"></pagination-controls>
+  </div>
