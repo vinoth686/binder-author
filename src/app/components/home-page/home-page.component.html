@@ -1,18 +1,18 @@
 <!-- <app-header></app-header> -->
+<div class="container">
 <div class="page-banner">
     <h3>Discover Latest Courses on Angular</h3>
 </div>
-<!-- <div *ngFor="let course of courses">
-    <ul>
-      <li>Author - {{ course.author }}</li>
-      <li>Actual Price - ₹{{ course.actualPrice }}</li>
-      <li>Discounted %age - {{ course.discountPercentage }}%</li>
-      <li>Tags - {{ course.tags.join(', ') }}</li>
-    </ul>
-  </div> -->
+  <div class="search-container right-align">
+    <input [(ngModel)]="searchText" placeholder="Search courses..." />
+  </div>
 
   <div class="card-container">
-    <div *ngFor="let course of courses | paginate: { itemsPerPage: 4, currentPage: p }" class="card">
+    <div class="no-data" *ngIf="filteredCourses.length === 0; else coursesList">
+      <p>No data found for '{{ searchText }}'.</p>
+    </div>
+    <ng-template #coursesList>
+    <div *ngFor="let course of filteredCourses | paginate: { itemsPerPage: 4, currentPage: p }" class="card">
     <h3>Viewing {{ course.courseName }}</h3>
         <p>Author - {{ course.author }}</p>
         <p>Actual Price - {{ course.actualPrice }}</p>
@@ -30,10 +30,11 @@
           </button>
         </div>
     </div>
+  </ng-template>
   </div> 
 
   <div class="pagination-container">
     <pagination-controls (pageChange)="p = $event" class="float-right"></pagination-controls>
   </div>
-<!-- 
-  <app-wishlist [cartItems]="cartItems"></app-wishlist> -->
+  </div>
+<!-- <app-wishlist [cartItems]="cartItems"></app-wishlist> -->

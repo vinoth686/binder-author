@@ -66,3 +66,17 @@
     float: none;
     display: inline-block;
   }
+
+  .no-data p{
+    text-align: center !important;
+  }
+
+  .right-align {
+    text-align: right;
+    margin-top: 13px;
+  }
+
+  .search-container input:focus {
+    border: 1px solid black;
+    outline: none; 
+  }

@@ -8,6 +8,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { WishlistComponent } from './components/wishlist/wishlist.component';
 import { CoursedetailsComponent } from './components/coursedetails/coursedetails.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -15,12 +16,13 @@ import { CoursedetailsComponent } from './components/coursedetails/coursedetails
     HomePageComponent,
     HeaderComponent,
     WishlistComponent,
-    CoursedetailsComponent
+    CoursedetailsComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

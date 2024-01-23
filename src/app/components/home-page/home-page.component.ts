@@ -16,8 +16,8 @@ interface Course {
 })
 
 export class HomePageComponent {
-
   
+  searchText: string = '';
   courses: Course[] = [
     {
       "courseName": "Advanced Machine Learning",
@@ -153,20 +153,22 @@ export class HomePageComponent {
       "tags": ["Cloud Computing"]
     }
   ]
-  constructor(private router: Router, private cartService: AuthorsService) {
+  p: number = 1;
+  constructor(private router: Router, private cartService: AuthorsService) {}
 
-  }
-
-
-p: number = 1;
+get filteredCourses(): Course[] {
+  return this.courses.filter(course =>
+    course.courseName.toLowerCase().includes(this.searchText.toLowerCase()) ||
+    course.author.toLowerCase().includes(this.searchText.toLowerCase()) ||
+    course.tags.some(tag => tag.toLowerCase().includes(this.searchText.toLowerCase()))
+  );
+}
 
 public addToCart(course: Course) {
-  console.log(course);
   this.cartService.addToCart(course);
 }
 
 public goToDetails(course: Course) {
   this.router.navigate(['/coursedetails'])
 }
-
 }
