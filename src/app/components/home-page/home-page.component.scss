@@ -8,6 +8,10 @@
     color: #333;
   }
 
+  h3 {
+    font-size: 18px;
+  }
+
   .card-container {
     display: flex;
     flex-wrap: wrap;
@@ -73,10 +77,19 @@
 
   .right-align {
     text-align: right;
-    margin-top: 13px;
+    // margin-top: 13px;
   }
 
   .search-container input:focus {
-    border: 1px solid black;
     outline: none; 
+  }
+
+  .sorting-container {
+    position: relative;
+    top: 22px;
+
+  }
+  
+  .sorting-container button {
+    margin-right: 10px;
   }

@@ -18,6 +18,7 @@ interface Course {
 export class HomePageComponent {
   
   searchText: string = '';
+  sortBy: string = '';
   courses: Course[] = [
     {
       "courseName": "Advanced Machine Learning",
@@ -156,14 +157,33 @@ export class HomePageComponent {
   p: number = 1;
   constructor(private router: Router, private cartService: AuthorsService) {}
 
-get filteredCourses(): Course[] {
-  return this.courses.filter(course =>
-    course.courseName.toLowerCase().includes(this.searchText.toLowerCase()) ||
-    course.author.toLowerCase().includes(this.searchText.toLowerCase()) ||
-    course.tags.some(tag => tag.toLowerCase().includes(this.searchText.toLowerCase()))
-  );
-}
+  get filteredCourses(): Course[] {
+    const filtered = this.courses.filter(course =>
+      course.courseName.toLowerCase().includes(this.searchText.toLowerCase()) ||
+      course.author.toLowerCase().includes(this.searchText.toLowerCase()) ||
+      course.tags.some(tag => tag.toLowerCase().includes(this.searchText.toLowerCase()))
+    );
+  
+    return this.sortCourses(filtered);
+  }
 
+  sortCourses(courses: Course[]): Course[] {
+    if (this.sortBy === 'lowToHigh') {
+      return courses.sort((a, b) => this.comparePrices(a.actualPrice, b.actualPrice));
+    } else if (this.sortBy === 'highToLow') {
+      return courses.sort((a, b) => this.comparePrices(b.actualPrice, a.actualPrice));
+    } else {
+      return courses;
+    }
+  }
+
+  comparePrices(priceA: string, priceB: string): number {
+    const priceNumA = parseInt(priceA.slice(1), 10); // Remove the '₹' and convert to number
+    const priceNumB = parseInt(priceB.slice(1), 10);
+  
+    return priceNumA - priceNumB;
+  }
+  
 public addToCart(course: Course) {
   this.cartService.addToCart(course);
 }
