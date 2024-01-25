@@ -1,1 +1,12 @@
-<p>wishlist works!</p>
+<div class="card-container">
+    <!-- <div class="no-data" *ngIf="filteredCourses.length === 0; else coursesList">
+      <p>No data found for '{{ searchText }}'.</p>
+    </div> -->
+      <div *ngFor="let course of cartItems" class="card">
+        <h3>{{ course.courseName }}</h3>
+        <p>Author - {{ course.author }}</p>
+        <p>Actual Price - {{ course.actualPrice }}</p>
+        <p>Discounted Price - {{ course.discountPercentage }}</p>
+        <p>Tags - {{ course.tags }}</p>
+      </div>
+  </div>

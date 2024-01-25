@@ -1,48 +1,49 @@
-<!-- <app-header></app-header> -->
 <div class="container">
   <div class="page-banner">
-    <h3>Discover Latest Courses on Angular</h3>
+      <h3>Discover Latest Courses on Angular</h3>
   </div>
 
   <div class="search-sort">
-    <div class="sorting-container">
-      <button (click)="sortBy = 'highToLow'">High to Low</button>
-      <button (click)="sortBy = 'lowToHigh'">Low to High</button>
-    </div>
+      <div class="sorting-container">
+          <button (click)="sortBy = 'highToLow'">Sort High to Low</button>
+          <button (click)="sortBy = 'lowToHigh'">Sort Low to High</button>
+      </div>
 
-    <div class="search-container right-align">
-      <input [(ngModel)]="searchText" placeholder="Search courses..." />
-    </div>
+      <div class="search-container right-align">
+          <input [(ngModel)]="searchText" placeholder="Search courses..." />
+      </div>
   </div>
 
   <div class="card-container">
-    <div class="no-data" *ngIf="filteredCourses.length === 0; else coursesList">
-      <p>No data found for '{{ searchText }}'.</p>
-    </div>
-    <ng-template #coursesList>
-      <div *ngFor="let course of filteredCourses | paginate: { itemsPerPage: 4, currentPage: p }" class="card">
-        <h3>{{ course.courseName }}</h3>
-        <p>Author - {{ course.author }}</p>
-        <p>Actual Price - {{ course.actualPrice }}</p>
-        <p>Discounted Price - {{ course.discountPercentage }}</p>
-        <p>Tags - {{ course.tags }}</p>
-        <div class="buttonContainer">
-          <button class="cart" (click)="addToCart(course)">Add to Cart
-            <span class="fa fa-plus"></span>
-          </button>
-          <button class="wishlist">Wishlist
-            <span class="fa fa-heart"></span>
-          </button>
-          <button class="arrow" (click)="goToDetails(course)">
-            <span class="fa fa-chevron-right"></span>
-          </button>
-        </div>
+      <div class="no-data" *ngIf="filteredCourses.length === 0; else coursesList">
+          <p>No data found for '{{ searchText }}'.</p>
       </div>
-    </ng-template>
+      <ng-template #coursesList>
+          <div *ngFor="let course of filteredCourses | paginate: { itemsPerPage: 4, currentPage: p }" class="card">
+              <h3>{{ course.courseName }}</h3>
+              <p>Author - {{ course.author }}</p>
+              <p>Actual Price - {{ course.actualPrice }}</p>
+              <p>Discounted Price - {{ course.discountPercentage }}</p>
+              <p>Tags - {{ course.tags }}</p>
+              <div class="buttonContainer">
+                  <button class="cart" (click)="addToCart(course);" [disabled]="course.addedToCart">
+                   
+                   {{ course.addedToCart ? 'Added' : 'Add to Cart' }}
+                      <span class="fa fa-plus"></span>
+                  </button>
+                  <button class="wishlist" (click)="addToCart(course);">Wishlist
+                      <span class="fa fa-heart"></span>
+                  </button>
+                  <button class="arrow" (click)="goToDetails(course)">
+                      <span class="fa fa-chevron-right"></span>
+                  </button>
+              </div>
+          </div>
+      </ng-template>
   </div>
 
   <div class="pagination-container">
-    <pagination-controls (pageChange)="p = $event" class="float-right"></pagination-controls>
+      <pagination-controls (pageChange)="p = $event" class="float-right"></pagination-controls>
   </div>
 </div>
-<!-- <app-wishlist [cartItems]="cartItems"></app-wishlist> -->
+

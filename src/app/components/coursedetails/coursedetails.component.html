@@ -1,1 +1,39 @@
-<p>coursedetails works!</p>
+   <div class="course-card" style="text-align: center;">
+    <div class="page-banner">
+        <h1>Course Details</h1>
+    </div>
+
+    <div class="breadcrumb">
+        <a routerLink="/">All Courses</a>
+    </div>
+
+    <div class="course-content">
+        <h2>{{ selectedCourse.courseName }}</h2>
+    </div>
+
+    <div class="course-content">
+        <h3>{{ selectedCourse.author }}</h3>
+    </div>
+
+    <div class="course-content price-section">
+        <h3>
+            <span *ngIf="discountPercentageAsNumber > 0" class="original-price">{{ selectedCourse.actualPrice }}</span>
+            <span *ngIf="discountPercentageAsNumber > 0" class="discounted-price">{{ calculateDiscountedPrice(selectedCourse.actualPrice, discountPercentageAsNumber) }}</span>
+            <span *ngIf="discountPercentageAsNumber === 0" class="original-price">{{ selectedCourse.actualPrice }}</span>
+        </h3>
+        <span *ngIf="discountPercentageAsNumber > 0" class="discount-label">{{ discountPercentageAsNumber }}% Off</span>
+    </div>
+
+    <div class="offer-end" *ngIf="discountPercentageAsNumber > 0">
+        <p>Offer ends on: {{ calculateOfferEnd() }} - Hurry Up!!!</p>
+    </div>
+
+    <div class="buttonContainer">
+      <button class="cart">Add to Cart
+        <span class="fa fa-plus"></span>
+      </button>
+      <button class="wishlist">Wishlist
+        <span class="fa fa-heart"></span>
+      </button>
+    </div>
+</div>

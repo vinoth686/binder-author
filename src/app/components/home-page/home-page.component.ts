@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 import { AuthorsService } from '../../service/authors.service';
 
 interface Course {
@@ -8,6 +8,7 @@ interface Course {
   actualPrice: string;
   discountPercentage: string;
   tags: string[];
+  addedToCart?: boolean
 }
 @Component({
   selector: 'app-home-page',
@@ -18,6 +19,7 @@ interface Course {
 export class HomePageComponent {
   
   searchText: string = '';
+  cartItems: Course[] = [];
   sortBy: string = '';
   courses: Course[] = [
     {
@@ -155,6 +157,9 @@ export class HomePageComponent {
     }
   ]
   p: number = 1;
+  test: boolean = false;
+  isAddedToCart: boolean = false;
+  addedToCart: boolean = false;
   constructor(private router: Router, private cartService: AuthorsService) {}
 
   get filteredCourses(): Course[] {
@@ -165,6 +170,10 @@ export class HomePageComponent {
     );
   
     return this.sortCourses(filtered);
+  }
+
+  public isCourseAddedToCart(course: Course): boolean {
+    return this.cartItems.some(item => item.courseName === course.courseName);
   }
 
   sortCourses(courses: Course[]): Course[] {
@@ -178,17 +187,22 @@ export class HomePageComponent {
   }
 
   comparePrices(priceA: string, priceB: string): number {
-    const priceNumA = parseInt(priceA.slice(1), 10); // Remove the '₹' and convert to number
+    const priceNumA = parseInt(priceA.slice(1), 10);
     const priceNumB = parseInt(priceB.slice(1), 10);
   
     return priceNumA - priceNumB;
   }
-  
+
 public addToCart(course: Course) {
   this.cartService.addToCart(course);
+  this.cartService.getCartItems().subscribe(items => {
+    this.cartItems = items;
+  });
+  course.addedToCart = true;
 }
 
 public goToDetails(course: Course) {
-  this.router.navigate(['/coursedetails'])
+  this.router.navigate(['coursedetails'], {state: {someData: course}});
+
 }
 }

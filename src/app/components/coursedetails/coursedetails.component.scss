@@ -1,0 +1,94 @@
+.course-card {
+  // width: 300px;
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.page-banner h1 {
+  font-size: 24px;
+  margin: 0;
+}
+
+.breadcrumb {
+  margin-top: 10px;
+}
+
+.breadcrumb a {
+  text-decoration: none;
+  color: #3498db;
+}
+
+.course-content h2,
+.course-content h3 {
+  margin: 10px 0;
+}
+
+.price-section {
+  margin-top: 20px;
+}
+
+.original-price {
+  text-decoration: line-through;
+  margin-right: 10px;
+}
+
+.discounted-price {
+  color: #e74c3c; 
+}
+
+.discount-label {
+  display: block;
+  color: #2ecc71;
+  margin-top: 5px;
+}
+
+.offer-end {
+  margin-top: 20px;
+  color: #e74c3c; 
+}
+
+h1 {
+  text-align: center;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+button {
+  display: inline-block;
+  padding: 10px 15px;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+}
+
+.cart {
+  background-color: #3498db;
+  margin-left: auto;
+  margin-right: 60px;
+}
+
+.wishlist {
+  background-color: #e74c3c;
+  margin-right: auto;
+}
+
+span.fa {
+  margin-left: 5px;
+}
+
+.fa-plus::before {
+  content: "\f067";
+}
+
+.fa-heart::before {
+  content: "\f004";
+}
