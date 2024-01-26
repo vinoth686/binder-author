@@ -19,19 +19,18 @@
           <p>No data found for '{{ searchText }}'.</p>
       </div>
       <ng-template #coursesList>
-          <div *ngFor="let course of filteredCourses | paginate: { itemsPerPage: 4, currentPage: p }" class="card">
+          <div (click)="goToDetails(course)" *ngFor="let course of filteredCourses | paginate: { itemsPerPage: 4, currentPage: p }" class="card">
               <h3>{{ course.courseName }}</h3>
               <p>Author - {{ course.author }}</p>
               <p>Actual Price - {{ course.actualPrice }}</p>
               <p>Discounted Price - {{ course.discountPercentage }}</p>
               <p>Tags - {{ course.tags }}</p>
               <div class="buttonContainer">
-                  <button class="cart" (click)="addToCart(course);">
-                   
+                  <button class="cart" (click)="addToCart($event, course); ">
                    Add to Cart
                       <span class="fa fa-plus"></span>
                   </button>
-                  <button class="wishlist" (click)="gotToWishList(course);">Wishlist
+                  <button class="wishlist" (click)="gotToWishList($event, course);">Wishlist
                       <span class="fa fa-heart"></span>
                   </button>
                   <button class="arrow" (click)="goToDetails(course)">

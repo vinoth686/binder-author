@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
-  constructor(private router: Router) {}
+  constructor(private router: Router, private cdr: ChangeDetectorRef) {}
   public navigatetoHomePage() : void  {
     this.router.navigate(['/home'])
   }
@@ -22,5 +22,6 @@ export class HeaderComponent {
 
   public navigateToCartDetail(): void {
     this.router.navigate(['cartdetails'])
+    this.cdr.detectChanges();
   }
 }

@@ -198,7 +198,7 @@ export class HomePageComponent {
     return priceNumA - priceNumB;
   }
 
-public addToCart(course: Course) {
+public addToCart(event: Event, course: Course) {
   if (this.isCourseInCart(course)) {
     this.alertService.showWarning('Course already added to cart!');
   } else {
@@ -209,10 +209,10 @@ public addToCart(course: Course) {
     course.addedToCart = true;
     this.alertService.showSuccess('Course added to cart successfully!');
   }
+  event.stopPropagation();
 }
 
-public gotToWishList(course: Course) {
-console.log(course)
+public gotToWishList(event: Event, course: Course) {
 let existingCart = localStorage.getItem('cart');
 
   if (!existingCart) {
@@ -224,6 +224,7 @@ let existingCart = localStorage.getItem('cart');
   cartArray.push(course);
 
   localStorage.setItem('cart', JSON.stringify(cartArray));
+  event.stopPropagation();
 }
 
 private isCourseInCart(course: Course): boolean {

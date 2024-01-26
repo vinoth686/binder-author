@@ -8,10 +8,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { CartDetailsComponent } from './components/cart-details/cart-details.component';
 
 const routes: Routes = [
-  // { path: '', component: HomePageComponent },
-  // { path: 'header', component: HeaderComponent}
-
-  { path: '', redirectTo: '/home', pathMatch: 'full' }, // Redirect empty path to '/home'
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomePageComponent },
   { path: 'header', component: HeaderComponent},
   { path: 'wishlist', component: WishlistComponent},

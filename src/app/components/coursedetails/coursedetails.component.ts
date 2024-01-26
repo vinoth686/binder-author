@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthorsService } from '../../service/authors.service';
+import { Router } from '@angular/router';
 interface Course {
   courseName: string;
   author: string;
@@ -15,15 +16,12 @@ interface Course {
 export class CoursedetailsComponent implements OnInit{
   selectedCourse: any;
   discountPercentageAsNumber: number = 0;
-  constructor(private cartService: AuthorsService) {}
+  constructor(private cartService: AuthorsService, private router: Router) {}
 
   ngOnInit(): void {
     this.selectedCourse = history.state.someData;
     const thresholdPercentage = "10%";
     this.discountPercentageAsNumber = parseFloat(this.selectedCourse.discountPercentage.replace("%", ""));
-
-
-    console.log(this.selectedCourse.discountPercentage < thresholdPercentage);
   }
 
   calculateDiscountedPrice(actualPrice: string, discountPercentage: number): string {
@@ -41,5 +39,9 @@ export class CoursedetailsComponent implements OnInit{
     const minutesLeft = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
 
     return `${hoursLeft} hours and ${minutesLeft} minutes`;
+  }
+
+  goToDashboard() {
+    this.router.navigate(['/'])
   }
 }

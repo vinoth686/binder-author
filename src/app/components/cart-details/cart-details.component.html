@@ -8,7 +8,7 @@
         <p>Author - {{ course.author }}</p>
         <p>Actual Price - {{ course.actualPrice }}</p>
         <p>Discounted Percentage - {{ course.discountPercentage }}</p>
-        <p >Discounted Price - {{ calculateDiscountedPrice(course.actualPrice, course.discountPercentage) }}</p>
+        <p>Discounted Price - {{ calculateDiscountedPrice(course.actualPrice, course.discountPercentage) }}</p>
         <p>Tags - {{ course.tags }}</p>
         <div class="button-container">
           <button class="cart" (click)="moveToWishlist(course, i)">
@@ -29,11 +29,11 @@
       </div>
       <div class="total-item">
         <span>Total Discounted Price:</span>
-        <span>{{ totalDiscountedDifference | currency: 'INR' }}</span>
+        <span>{{ totalDifferenceSum | currency: 'INR' }}</span>
       </div>
       <div class="total-item">
         <span>Total Cart Value:</span>
-        <span>{{totalDiscountedPrice | currency: 'INR'}}</span>
+        <span>{{totalDiscountedSum | currency: 'INR'}}</span>
       </div>
       <button class="checkout-button" (click)="checkout()">Checkout</button>
     </div>

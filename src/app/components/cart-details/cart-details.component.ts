@@ -14,36 +14,34 @@ interface Course {
   styleUrl: './cart-details.component.scss'
 })
 export class CartDetailsComponent {
-  cartItems: any;
-  totalDiscountedPrice: number = 0;
-  totalDiscountedDifference: number = 0;
-  constructor(private cartService: AuthorsService, private alertService: AlertService) {}
+  cartItems: any = [];
+
+  totalDiscountedSum: number = 0; 
+  totalDifferenceSum: number = 0; 
+  
+  constructor(private cartService: AuthorsService, private alertService: AlertService) {
+  }
 
   ngOnInit() {
     this.cartService.getCartItems().subscribe((items) => {
       this.cartItems = items;
-      console.log(this.cartItems);
+      this.cartItems.forEach((item: Course) => {
+        const discountedPrice = this.calculateDiscountedPrice(item.actualPrice, item.discountPercentage);
+        const actualPrice = parseFloat(item.actualPrice.replace('₹', '').replace(',', ''));
+        const discountedValue = parseFloat(discountedPrice.replace('₹', ''));
+        const difference = actualPrice - discountedValue;
+        this.totalDifferenceSum += difference;
+        this.totalDiscountedSum += discountedValue;
+      });
     });
-
   }
 
   calculateDiscountedPrice(actualPrice: string, discountPercentage: string): string {
     const price = parseFloat(actualPrice.replace('₹', '').replace(',', ''));
-    const discount = parseFloat(discountPercentage);
+    const discount = parseFloat(discountPercentage.replace('%', ''));
 
-    if (!isNaN(price) && !isNaN(discount)) {
-      // if (discount > 0) {
-        const discountedPrice = price - (price * discount / 100);
-        const difference = price - discountedPrice;
-        this.totalDiscountedDifference += difference;
-
-        this.totalDiscountedPrice += discountedPrice;
-
-        return '₹' + discountedPrice.toFixed(2).toString();
-      // }
-    }
-
-    return '';
+    const discountedPrice = price - (price * (discount / 100));
+    return `₹${discountedPrice.toFixed(2)}`;
   }
 
   checkout() {
