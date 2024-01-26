@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { AuthorsService } from '../../service/authors.service';
+import { AlertService } from '../../alert.service';
 
 interface Course {
   courseName: string;
@@ -160,8 +161,12 @@ export class HomePageComponent {
   test: boolean = false;
   isAddedToCart: boolean = false;
   addedToCart: boolean = false;
-  constructor(private router: Router, private cartService: AuthorsService) {}
+  constructor(private router: Router, private cartService: AuthorsService, private alertService: AlertService) {}
 
+  ngOnInit() {
+    this.cartItems = this.cartService.getCartItemsFromStorage();
+  }
+  
   get filteredCourses(): Course[] {
     const filtered = this.courses.filter(course =>
       course.courseName.toLowerCase().includes(this.searchText.toLowerCase()) ||
@@ -194,15 +199,38 @@ export class HomePageComponent {
   }
 
 public addToCart(course: Course) {
-  this.cartService.addToCart(course);
-  this.cartService.getCartItems().subscribe(items => {
-    this.cartItems = items;
-  });
-  course.addedToCart = true;
+  if (this.isCourseInCart(course)) {
+    this.alertService.showWarning('Course already added to cart!');
+  } else {
+    this.cartService.addToCart(course);
+    this.cartService.getCartItems().subscribe(items => {
+      this.cartItems = items;
+    });
+    course.addedToCart = true;
+    this.alertService.showSuccess('Course added to cart successfully!');
+  }
+}
+
+public gotToWishList(course: Course) {
+console.log(course)
+let existingCart = localStorage.getItem('cart');
+
+  if (!existingCart) {
+    existingCart = '[]';
+  }
+
+  const cartArray = JSON.parse(existingCart);
+
+  cartArray.push(course);
+
+  localStorage.setItem('cart', JSON.stringify(cartArray));
+}
+
+private isCourseInCart(course: Course): boolean {
+  return this.cartItems.some(item => item.courseName === course.courseName);
 }
 
 public goToDetails(course: Course) {
   this.router.navigate(['coursedetails'], {state: {someData: course}});
-
 }
 }

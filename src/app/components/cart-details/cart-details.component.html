@@ -1,0 +1,40 @@
+  <div class="cart-container">
+    <div class="cart-items">
+      <div class="no-data" *ngIf="cartItems.length === 0;">
+        <p>Cart is Empty.</p>
+      </div>
+      <div *ngFor="let course of cartItems; let i = index" class="card">
+        <h3>{{ course.courseName }}</h3>
+        <p>Author - {{ course.author }}</p>
+        <p>Actual Price - {{ course.actualPrice }}</p>
+        <p>Discounted Percentage - {{ course.discountPercentage }}</p>
+        <p >Discounted Price - {{ calculateDiscountedPrice(course.actualPrice, course.discountPercentage) }}</p>
+        <p>Tags - {{ course.tags }}</p>
+        <div class="button-container">
+          <button class="cart" (click)="moveToWishlist(course, i)">
+            Move to Wishlist
+            <span class="fa fa-heart"></span>
+          </button>
+          <button class="wishlist" (click)="delete(i)">
+            Delete
+            <span class="fa fa-trash"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="totals" *ngIf="cartItems.length !== 0;">
+      <div class="total-item">
+        <span>Total Cart Items:</span>
+        <span>{{cartItems.length}}</span>
+      </div>
+      <div class="total-item">
+        <span>Total Discounted Price:</span>
+        <span>{{ totalDiscountedDifference | currency: 'INR' }}</span>
+      </div>
+      <div class="total-item">
+        <span>Total Cart Value:</span>
+        <span>{{totalDiscountedPrice | currency: 'INR'}}</span>
+      </div>
+      <button class="checkout-button" (click)="checkout()">Checkout</button>
+    </div>
+  </div>

@@ -1,0 +1,41 @@
+<form [formGroup]="profileForm">
+    <label for="displayName">Display Name*</label>
+    <input type="text" id="displayName" formControlName="displayName">
+  
+    <label for="firstName">First Name*</label>
+    <input type="text" id="firstName" formControlName="firstName">
+  
+    <label for="lastName">Last Name</label>
+    <input type="text" id="lastName" formControlName="lastName">
+
+    <label for="aboutYourself">About Yourself (Max 100 characters)</label>
+    <textarea id="aboutYourself" formControlName="aboutYourself" maxlength="100"></textarea>
+  
+    <label for="areaOfInterest">Area of Interest</label>
+    <select id="areaOfInterest" formControlName="areaOfInterest">
+      <option value="technology">Technology</option>
+      <option value="science">Science</option>
+    </select>
+  
+    <label>Are you a student or a professional?</label>
+    <input type="radio" id="student" formControlName="status" value="student"> Student
+    <input type="radio" id="professional" formControlName="status" value="professional"> Professional
+  
+    <div formGroupName="professionalDetails">
+      <label for="experience">Experience</label>
+      <select id="experience" formControlName="experience">
+        <option value="0-5">0-5 years</option>
+        <option value="5-10">5-10 years</option>
+        <option value="10-above">10 years and above</option>
+      </select>
+  
+      <label for="expertise">Expertise</label>
+      <input type="text" id="expertise" formControlName="expertise">
+  
+      <label for="role">Mention your role (Max 200 characters)</label>
+      <textarea id="role" formControlName="role" maxlength="200"></textarea>
+    </div>
+  
+    <button type="button" (click)="saveProfile()" [disabled]="profileForm.invalid">Save</button>
+  </form>
+  

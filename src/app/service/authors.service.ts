@@ -25,16 +25,21 @@ export class AuthorsService {
   }
 
   addToCart(item: any) {
-    console.log(item)
     this.cartItems.push(item);
-    // this.cartItems.splice(0, this.cartItems.length);
     this.cartItemsSubject.next(this.cartItems);
+    this.updateCartItemsInStorage(); 
+  }
+
+  getCartItemsFromStorage(): Course[] {
+    const storedItems = localStorage.getItem('wishlist');
+    return storedItems ? JSON.parse(storedItems) : [];
+  }
+  
+  updateCartItemsInStorage() {
     localStorage.setItem('wishlist', JSON.stringify(this.cartItems));
-    // this.messageSource.next(item);
   }
 
   getCartItems() {
-    // return this.cartItems;
     return this.cartItemsSubject.asObservable();
   }
 }

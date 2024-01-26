@@ -1,12 +1,22 @@
 <div class="card-container">
-    <!-- <div class="no-data" *ngIf="filteredCourses.length === 0; else coursesList">
-      <p>No data found for '{{ searchText }}'.</p>
-    </div> -->
-      <div *ngFor="let course of cartItems" class="card">
+    <div class="no-data" *ngIf="wishlist.length === 0;">
+      <p>Wishlist is Empty.</p>
+    </div>
+      <div *ngFor="let course of wishlist; let i = index" class="card">
         <h3>{{ course.courseName }}</h3>
         <p>Author - {{ course.author }}</p>
         <p>Actual Price - {{ course.actualPrice }}</p>
         <p>Discounted Price - {{ course.discountPercentage }}</p>
         <p>Tags - {{ course.tags }}</p>
+        <div class="buttonContainer">
+          <button class="cart" (click)="addToCart(course, i);">
+               Move to cart
+          <span class="fa fa-plus"></span>
+          </button>
+          <button class="wishlist" (click) ="delete(i)">
+              Delete
+          <span class="fa fa-heart"></span>
+          </button>
+      </div>
       </div>
   </div>

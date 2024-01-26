@@ -8,7 +8,9 @@ import { HeaderComponent } from './components/header/header.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { WishlistComponent } from './components/wishlist/wishlist.component';
 import { CoursedetailsComponent } from './components/coursedetails/coursedetails.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ProfileComponent } from './components/profile/profile.component';
+import { CartDetailsComponent } from './components/cart-details/cart-details.component';
 
 @NgModule({
   declarations: [
@@ -17,12 +19,15 @@ import { FormsModule } from '@angular/forms';
     HeaderComponent,
     WishlistComponent,
     CoursedetailsComponent,
+    ProfileComponent,
+    CartDetailsComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgxPaginationModule,
     FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

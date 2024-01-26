@@ -26,12 +26,12 @@
               <p>Discounted Price - {{ course.discountPercentage }}</p>
               <p>Tags - {{ course.tags }}</p>
               <div class="buttonContainer">
-                  <button class="cart" (click)="addToCart(course);" [disabled]="course.addedToCart">
+                  <button class="cart" (click)="addToCart(course);">
                    
-                   {{ course.addedToCart ? 'Added' : 'Add to Cart' }}
+                   Add to Cart
                       <span class="fa fa-plus"></span>
                   </button>
-                  <button class="wishlist" (click)="addToCart(course);">Wishlist
+                  <button class="wishlist" (click)="gotToWishList(course);">Wishlist
                       <span class="fa fa-heart"></span>
                   </button>
                   <button class="arrow" (click)="goToDetails(course)">

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthorsService } from '../../service/authors.service';
+import { AlertService } from '../../alert.service';
 interface Course {
   courseName: string;
   author: string;
@@ -14,15 +15,27 @@ interface Course {
 })
 export class WishlistComponent implements OnInit {
   cartItems: Course[] = [];
+  wishlist: any = '';
 
-  constructor(private cartService: AuthorsService) {}
+  constructor(private cartService: AuthorsService, private alertService: AlertService) {}
 
   ngOnInit() {
-    // this.cartItems = this.cartService.getCartItems();
-    // console.log(this.cartItems);
-    this.cartService.getCartItems().subscribe((items) => {
-      this.cartItems = items;
-      console.log(this.cartItems);
-    });
+    const wishlist = localStorage.getItem('cart');
+    this.wishlist = wishlist ? JSON.parse(wishlist) : [];
+  }
+
+  delete(i:number) {
+      this.wishlist.splice(i, 1);
+      localStorage.setItem('cart', JSON.stringify(this.wishlist));
+  }
+
+  public addToCart(course: any, i:number) {
+      this.cartService.addToCart(course);
+      this.cartService.getCartItems().subscribe(items => {
+        this.cartItems = items;
+      });
+      this.wishlist.splice(i, 1);
+      localStorage.setItem('cart', JSON.stringify(this.wishlist));
+      this.alertService.showSuccess('Course added to cart successfully!');
   }
 }

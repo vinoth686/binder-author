@@ -15,4 +15,12 @@ export class HeaderComponent {
   public navigatetoWishList(): void {
     this.router.navigate(['wishlist'])
   }
+
+  public navigateToProfile(): void {
+    this.router.navigate(['profile'])
+  }
+
+  public navigateToCartDetail(): void {
+    this.router.navigate(['cartdetails'])
+  }
 }
